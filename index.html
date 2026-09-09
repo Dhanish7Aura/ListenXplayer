@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ListenX - Music Player</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- FULL SCREEN NOW PLAYING -->
+
+<div id="nowPlayingScreen" class="now-playing-screen hidden">
+
+    <button id="closeNowPlaying" class="close-now-playing">
+        ✕
+    </button>
+
+    <div class="now-playing-content">
+
+        <img
+            id="nowPlayingCover"
+            src="images/song1.jpg"
+            alt="Album Cover"
+        >
+
+        <p class="now-playing-label">
+            NOW PLAYING
+        </p>
+
+        <h1 id="nowPlayingTitle">
+            Song Title
+        </h1>
+
+        <p id="nowPlayingArtist">
+            Artist
+        </p>
+
+        <div class="now-playing-glow"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SIDEBAR
+========================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        🎵 ListenX
+    </div>
+
+    <button id="homeBtn">
+        🏠 Home
+    </button>
+
+    <button id="searchBtn">
+        🔍 Search
+    </button>
+
+    <button id="likedSongsBtn">
+        ❤️ Liked Songs
+    </button>
+
+    <button id="playlistBtn">
+        📁 Playlists
+    </button>
+
+    <button id="settingsBtn">
+        ⚙️ Settings
+    </button>
+
+</aside>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================== -->
+
+<main class="main">
+
+    <!-- HOME -->
+
+    <section id="homeSection">
+
+        <!-- PREMIUM HERO -->
+
+        <div class="hero">
+
+            <div class="hero-content">
+
+                <p class="hero-small">
+                    WELCOME TO
+                </p>
+
+                <h1>
+                    Listen<span>X</span>
+                </h1>
+
+                <p class="hero-text">
+                    Your music. Your mood. Your world.
+                </p>
+
+                <button id="heroExploreBtn">
+                    🎵 Explore Music
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <h2>
+            All Songs
+            <span id="songCount"></span>
+        </h2>
+
+        <div
+            class="song-grid"
+            id="songList">
+        </div>
+
+
+        <h2>
+            Recently Played
+        </h2>
+
+        <div
+            class="song-grid"
+            id="recentlyPlayedList">
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SEARCH SECTION
+    ========================== -->
+
+    <section
+        id="searchSection"
+        class="hidden">
+
+        <h2>
+            Search
+        </h2>
+
+       <div class="search-box">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search songs or artists..."
+        autocomplete="off">
+
+    <div
+        id="searchSuggestions"
+        class="search-suggestions hidden">
+    </div>
+
+</div>
+
+<div
+    class="song-grid"
+    id="searchResults">
+</div>
+
+    </section>
+
+
+    <!-- =========================
+         LIKED SONGS
+    ========================== -->
+
+    <section
+        id="likedSection"
+        class="hidden">
+
+        <h2>
+            ❤️ Liked Songs
+        </h2>
+
+        <div
+            class="song-grid"
+            id="likedSongsList">
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PLAYLIST SECTION
+    ========================== -->
+
+    <section
+        id="playlistSection"
+        class="hidden">
+
+        <h2>
+            📁 Playlists
+        </h2>
+
+        <div class="playlist-area">
+
+            <input
+                type="text"
+                id="playlistName"
+                placeholder="Enter playlist name">
+
+            <button id="createPlaylistBtn">
+                Create Playlist
+            </button>
+
+        </div>
+
+        <div id="playlistList"></div>
+
+        <div id="playlistSongs"></div>
+
+    </section>
+
+
+    <!-- =========================
+         SETTINGS SECTION
+    ========================== -->
+
+    <section
+        id="settingsSection"
+        class="hidden">
+
+        <h2>
+            ⚙️ Settings
+        </h2>
+
+        <div class="settings-card">
+
+            <div class="setting-row">
+
+                <div>
+
+                    <h3>
+                        Autoplay
+                    </h3>
+
+                    <p>
+                        Automatically play the next song
+                    </p>
+
+                </div>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="autoplayToggle"
+                        checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <h3>
+                        Keyboard Shortcuts
+                    </h3>
+
+                    <p>
+                        Use keyboard controls while listening
+                    </p>
+
+                </div>
+
+                <span class="setting-status">
+                    Enabled
+                </span>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <h3>
+                        ListenX Version
+                    </h3>
+
+                    <p>
+                        Your music player
+                    </p>
+
+                </div>
+
+                <span class="setting-status">
+                    1.0
+                </span>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <h3>
+                        ⌨️ Keyboard Shortcuts
+                    </h3>
+
+                    <p>
+                        Control ListenX without using the mouse
+                    </p>
+
+                </div>
+
+                <button
+                    id="shortcutsBtn"
+                    class="settings-action">
+
+                    View Shortcuts
+
+                </button>
+
+            </div>
+            <div class="setting-row">
+
+    <div>
+
+        <h3>
+            🎚️ Equalizer
+        </h3>
+
+        <p>
+            Adjust Bass, Vocals and Treble
+        </p>
+
+    </div>
+
+    <button
+        id="equalizerBtn"
+        class="settings-action">
+
+        Open
+
+    </button>
+
+</div>
+
+
+<div
+    id="equalizerPanel"
+    class="hidden">
+
+    <div class="eq-control">
+
+        <label>
+            Bass:
+            <span id="bassValue">0 dB</span>
+        </label>
+
+        <input
+            type="range"
+            id="bassControl"
+            min="-12"
+            max="12"
+            value="0">
+
+    </div>
+
+
+    <div class="eq-control">
+
+        <label>
+            Vocals:
+            <span id="vocalValue">0 dB</span>
+        </label>
+
+        <input
+            type="range"
+            id="vocalControl"
+            min="-12"
+            max="12"
+            value="0">
+
+    </div>
+
+
+    <div class="eq-control">
+
+        <label>
+            Treble:
+            <span id="trebleValue">0 dB</span>
+        </label>
+
+        <input
+            type="range"
+            id="trebleControl"
+            min="-12"
+            max="12"
+            value="0">
+
+    </div>
+
+
+    <button
+        id="resetEqualizer"
+        class="settings-action">
+
+        Reset
+
+    </button>
+
+</div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     ADD TO PLAYLIST POPUP
+========================== -->
+
+<div
+    id="playlistPopup"
+    class="popup hidden">
+
+    <div class="popup-content">
+
+        <h2>
+            Add to Playlist
+        </h2>
+
+        <div id="playlistChoices"></div>
+
+        <button id="closePopup">
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     UP NEXT QUEUE
+========================== -->
+
+<div
+    id="queuePanel"
+    class="queue-panel hidden">
+
+    <div class="queue-header">
+
+        <h2>
+            Up Next
+        </h2>
+
+        <button id="closeQueue">
+            ✕
+        </button>
+
+    </div>
+
+    <div id="queueList"></div>
+
+</div>
+
+
+<!-- =========================
+     KEYBOARD SHORTCUTS POPUP
+========================== -->
+
+<div
+    id="shortcutsPopup"
+    class="popup hidden">
+
+    <div class="popup-content shortcuts-content">
+
+        <h2>
+            ⌨️ Keyboard Shortcuts
+        </h2>
+
+        <div class="shortcut-row">
+
+            <span>
+                Play / Pause
+            </span>
+
+            <kbd>
+                SPACE
+            </kbd>
+
+        </div>
+
+        <div class="shortcut-row">
+
+            <span>
+                Previous Song
+            </span>
+
+            <kbd>
+                ←
+            </kbd>
+
+        </div>
+
+        <div class="shortcut-row">
+
+            <span>
+                Next Song
+            </span>
+
+            <kbd>
+                →
+            </kbd>
+
+        </div>
+
+        <div class="shortcut-row">
+
+            <span>
+                Mute / Unmute
+            </span>
+
+            <kbd>
+                M
+            </kbd>
+
+        </div>
+
+        <div class="shortcut-row">
+
+            <span>
+                Like / Unlike
+            </span>
+
+            <kbd>
+                L
+            </kbd>
+
+        </div>
+
+        <button id="closeShortcuts">
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MUSIC PLAYER
+========================== -->
+
+<div class="player">
+
+    <!-- Album Cover -->
+
+    <img
+        id="currentCover"
+        class="album-cover"
+        src="images/song1.jpg"
+        alt="Album Cover">
+
+
+    <!-- Song Information -->
+
+    <div class="player-info">
+
+        <h3 id="currentTitle">
+            Song Title
+        </h3>
+
+        <p id="currentArtist">
+            Artist
+        </p>
+
+    </div>
+
+
+    <!-- VISUALIZER -->
+
+    <div
+        class="visualizer"
+        id="visualizer">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+    <!-- PLAYER CONTROLS -->
+
+    <div class="player-controls">
+
+        <button id="shuffle">
+            🔀
+        </button>
+
+        <button id="previous">
+            ⏮
+        </button>
+
+        <button id="playPause">
+            ▶
+        </button>
+
+        <button id="next">
+            ⏭
+        </button>
+
+        <button id="repeat">
+            🔁
+        </button>
+
+        <button id="like">
+            ♡
+        </button>
+
+        <button id="queueBtn">
+            ☰
+        </button>
+
+        <button id="nowPlayingBtn">
+            ⛶
+        </button>
+
+    </div>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress-container">
+
+        <input
+            type="range"
+            id="progress"
+            min="0"
+            max="100"
+            value="0">
+
+        <div class="time">
+
+            <span id="currentTime">
+                0:00
+            </span>
+
+            <span id="duration">
+                0:00
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- VOLUME -->
+
+    <input
+        type="range"
+        id="volume"
+        min="0"
+        max="1"
+        step="0.01"
+        value="1">
+
+    <button
+        id="muteBtn"
+        title="Mute">
+
+        🔊
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     AUDIO
+========================== -->
+
+<audio id="audio"></audio>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
