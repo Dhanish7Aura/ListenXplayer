@@ -43,6 +43,7 @@ body {
         #7c3cff
     );
 
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -742,6 +743,7 @@ section h2 {
         #c084fc
     );
 
+    background-clip: text;
     -webkit-background-clip: text;
 
     -webkit-text-fill-color: transparent;
@@ -1383,6 +1385,7 @@ section h2 {
         #b66cff
     );
 
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -1879,8 +1882,6 @@ section h2 {
     opacity: 0.85;
 }
 
-
-
 /* ========================================
    LISTENX MOBILE RESPONSIVE
 ======================================== */
@@ -1915,21 +1916,21 @@ section h2 {
         font-size: 20px;
     }
 
-
     /* MAIN CONTENT */
     .main {
         margin-left: 65px;
-        padding: 20px 12px 180px;
+        padding: 20px 12px 145px;
         min-width: 0;
         width: calc(100% - 65px);
+        box-sizing: border-box;
     }
-
 
     /* HERO */
     .hero {
         padding: 25px 15px;
         text-align: center;
         width: 100%;
+        box-sizing: border-box;
     }
 
     .hero h1 {
@@ -1944,20 +1945,18 @@ section h2 {
         font-size: 11px;
     }
 
-
-    /* ALL SONGS */
+    /* SONG GRID */
     .song-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
         width: 100%;
     }
 
-
-    /* SONG CARD */
     .song-card {
         width: 100%;
         min-width: 0;
         padding: 10px;
+        box-sizing: border-box;
     }
 
     .song-card img {
@@ -1981,89 +1980,134 @@ section h2 {
         text-overflow: ellipsis;
     }
 
-
-    /* MUSIC PLAYER */
+    /* MOBILE MUSIC PLAYER */
     .player {
+        position: fixed;
         left: 0;
         right: 0;
         bottom: 0;
         width: 100%;
-        height: auto;
-        min-height: 105px;
-        padding: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        height: 125px;
+        min-height: 125px;
+        padding: 8px 10px;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 48px minmax(0, 1fr) auto;
+        grid-template-rows: 45px 38px 20px;
+        column-gap: 8px;
+        row-gap: 3px;
+        align-items: center;
+        z-index: 9999;
     }
 
     .album-cover {
-        width: 50px;
-        height: 50px;
-        margin-right: 5px;
-        flex-shrink: 0;
+        width: 45px;
+        height: 45px;
+        margin: 0;
+        grid-column: 1;
+        grid-row: 1;
+        object-fit: cover;
     }
 
     .player-info {
-        width: calc(100% - 65px);
+        width: auto;
         min-width: 0;
+        grid-column: 2;
+        grid-row: 1;
+        overflow: hidden;
     }
 
     .player-info h3 {
-        font-size: 14px;
+        font-size: 13px;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .player-info p {
-        font-size: 11px;
+        font-size: 10px;
+        margin: 3px 0 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
+    /* Hide visualizer on phones */
+    .visualizer {
+        display: none;
+    }
 
-    /* PLAYER CONTROLS */
+    /* All player buttons stay visible */
     .player-controls {
+        grid-column: 1 / -1;
+        grid-row: 2;
         width: 100%;
-        margin-left: 0;
+        margin: 0;
+        display: flex;
         justify-content: center;
-        gap: 10px;
-        order: 3;
+        align-items: center;
+        gap: 8px;
+        overflow: visible;
     }
 
     .player-controls button {
-        font-size: 17px;
+        flex: 0 0 auto;
+        padding: 3px;
+        font-size: 15px;
+        line-height: 1;
     }
 
     #playPause {
-        width: 42px;
-        height: 42px;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 50%;
+        font-size: 17px;
     }
 
-
-    /* PROGRESS */
+    /* Progress bar */
     .progress-container {
+        grid-column: 1 / -1;
+        grid-row: 3;
         width: 100%;
+        margin: 0;
         flex: none;
-        margin-left: 0;
-        order: 2;
     }
 
     #progress {
         width: 100%;
+        height: 4px;
     }
 
+    .time {
+        display: none;
+    }
 
-    /* VOLUME */
+    /* Volume slider is replaced by the mute button on mobile */
     #volume {
-        max-width: 80px;
+        display: none;
     }
 
+    #muteBtn {
+        grid-column: 3;
+        grid-row: 1;
+        border: none;
+        background: transparent;
+        color: #ffffff;
+        font-size: 18px;
+        padding: 5px;
+        cursor: pointer;
+    }
 
     /* QUEUE */
     .queue-panel {
         left: 10px;
         right: 10px;
-        bottom: 115px;
+        bottom: 130px;
         width: auto;
         max-height: 60vh;
     }
-
 
     /* SEARCH */
     .search-box {
@@ -2075,33 +2119,104 @@ section h2 {
         box-sizing: border-box;
     }
 
-
     /* SETTINGS */
     .settings-card {
         width: 100%;
+        box-sizing: border-box;
     }
 
     .setting-row {
         gap: 10px;
     }
 
-
     /* EQUALIZER */
     #equalizerPanel {
         width: 100%;
         padding: 18px 12px;
+        box-sizing: border-box;
     }
 
     .eq-control input[type="range"] {
         width: 100%;
     }
 
-
     /* NOW PLAYING */
     .now-playing {
         padding: 15px;
     }
-
 }
 
+/* ========================================
+   VERY SMALL PHONES
+======================================== */
 
+@media (max-width: 480px) {
+
+    .sidebar {
+        width: 55px;
+        padding: 18px 6px;
+    }
+
+    .main {
+        margin-left: 55px;
+        width: calc(100% - 55px);
+        padding: 15px 8px 145px;
+    }
+
+    .song-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+    }
+
+    .song-card {
+        padding: 7px;
+    }
+
+    .song-card h3 {
+        font-size: 12px;
+    }
+
+    .song-card p {
+        font-size: 10px;
+    }
+
+    .hero {
+        padding: 20px 10px;
+    }
+
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    .player {
+        height: 120px;
+        min-height: 120px;
+        padding: 7px 8px;
+        grid-template-columns: 45px minmax(0, 1fr) auto;
+        grid-template-rows: 43px 36px 18px;
+    }
+
+    .album-cover {
+        width: 43px;
+        height: 43px;
+    }
+
+    .player-controls {
+        gap: 6px;
+    }
+
+    .player-controls button {
+        font-size: 14px;
+    }
+
+    #playPause {
+        width: 37px;
+        height: 37px;
+        min-width: 37px;
+        font-size: 16px;
+    }
+
+    .main {
+        padding-bottom: 140px;
+    }
+}
